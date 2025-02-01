@@ -1,9 +1,14 @@
-// interface NextButtonProps {
-//     dispatch: React.Dispatch<any>;
-//     answer: string | null;
-// }
+import { Dispatch } from "react";
+import { Action } from "../types/shared-types";
 
-function NextButton({ dispatch, answer, index, numOfQuestions }) {
+interface NextButtonProps {
+    dispatch: Dispatch<Action>;
+    answer: number | null;
+    index: number;
+    numOfQuestions: number;
+}
+
+function NextButton({ dispatch, answer, index, numOfQuestions }: NextButtonProps) {
     if (answer === null) return null;
     if (index === numOfQuestions) return (
         <button className="btn btn-ui" onClick={() => dispatch({ type: "restart" })}>Finish</button>

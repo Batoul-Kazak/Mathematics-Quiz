@@ -16,7 +16,7 @@ const SECS_PER_QUESTION = 40;
 interface QuestionType {
   question: string;
   options: string[];
-  correctOption: string;
+  correctOption: number;
   points: number;
 }
 
@@ -24,7 +24,7 @@ interface State {
   questions: QuestionType[];
   status: "ready" | "loading" | "error" | "active" | "finished" | "restart";
   index: number;
-  answer: string | null;
+  answer: number | null;
   points: number;
   highScore: number,
   remainingSeconds: number | null
@@ -36,9 +36,9 @@ type Action =
   | { type: "start" }
   | { type: "newAnswer"; payload: string } // Payload is the selected answer
   | { type: "nextQuestion" }
-  | { type: "finish" };
-// | {type : "restart"},
-// | {type : "tick"},
+  | { type: "finish" }
+  | { type: "restart" }
+  | { type: "tick" };
 
 const initialState: State = {
   questions: [],
@@ -73,12 +73,12 @@ function reducer(state: State, action: Action): State {
         remainingSeconds: state.questions.length * SECS_PER_QUESTION
       };
     case "newAnswer": {
-      const question = state.questions.at(state.index);
+      const question = state.questions.at(Number(state.index));
 
       return {
         ...state,
-        answer: action.payload,
-        points: action.payload === question?.correctOption ? state.points + question.points : state.points,
+        answer: Number(action.payload),
+        points: Number(action.payload) === question.correctOption ? state.points + question.points : state.points,
       }
     };
     case "nextQuestion":
@@ -94,7 +94,7 @@ function reducer(state: State, action: Action): State {
         remainingSeconds: state.questions.length * SECS_PER_QUESTION
       }
     case "tick": return {
-      ...state, remainingSeconds: state.remainingSeconds - 1,
+      ...state, remainingSeconds: (state.remainingSeconds != null) ? state.remainingSeconds - 1 : 0,
       status: state.remainingSeconds === 0 ? "finished" : state.status
     }
     default:
@@ -126,8 +126,6 @@ function App() {
     fetchQuestions();
   }, []);
 
-  const currentQuestion = questions[index];
-
   return (
     <div className='app'>
       <Header />
@@ -136,13 +134,13 @@ function App() {
         {status === "loading" && <Loader />}
         {status === "error" && <Error />}
         {status === "ready" && <StartScreen numOfQuestions={numOfQuestions} dispatch={dispatch} />}
-        {status === "active" && currentQuestion && ( // Check if currentQuestion exists
+        {status === "active" && questions[index] && ( // Check if currentQuestion exists
           <>
             <Progress numOfQuestions={numOfQuestions} index={index} points={points} maxPossiblePoints={maxPossiblePoints} answer={answer} />
-            <Question question={currentQuestion} dispatch={dispatch} answer={answer} />
+            <Question question={questions[index]} dispatch={dispatch} answer={answer} />
             <footer>
               <Timer dispatch={dispatch} remainingSeconds={remainingSeconds} />
-              <NextButton dispatch={dispatch} answer={answer} currentQuestion={currentQuestion}
+              <NextButton dispatch={dispatch} answer={answer} currentQuestion={questions[index]}
                 index={index} numOfQuestions={numOfQuestions} /> {/* Pass currentQuestion and index */}
             </footer>
           </>

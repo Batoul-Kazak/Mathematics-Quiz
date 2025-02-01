@@ -4,8 +4,17 @@ import happy from "./../assets/Pi (Happy).png"
 import dumb from "./../assets/Pi (Dumb).png"
 import confident from "./../assets/Pi (Confident).png"
 import pi from "./../assets/Pi.png"
+import { Dispatch } from "react";
+import { Action } from "../types/shared-types";
 
-function FinishScreen({ points, maxPossiblePoints, dispatch, highScore }) {
+interface FinishScreenProps {
+  points: number,
+  maxPossiblePoints: number;
+  dispatch: Dispatch<Action>;
+  heighScore: number;
+}
+
+function FinishScreen({ points, maxPossiblePoints, dispatch, highScore }: FinishScreenProps) {
   // const { points, maxPossiblePoints, highscore, dispatch } = useQuiz();
   const percentage = (points / maxPossiblePoints) * 100;
   let emoji;
@@ -20,7 +29,7 @@ function FinishScreen({ points, maxPossiblePoints, dispatch, highScore }) {
         You Scored <strong>{points}</strong>out of {maxPossiblePoints} (
         {Math.ceil(percentage)}%)
       </p>
-      {/* <p className="highscore">(Highscore: {highScore} points)</p> */}
+      <p className="highscore">(Highscore: {highScore} points)</p>
       <button
         className="btn btn-ui"
         onClick={() => dispatch({ type: "restart" })}

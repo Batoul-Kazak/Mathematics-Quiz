@@ -12,7 +12,10 @@ dist
 dist-ssr
 *.l
 
-Real/*
+src/components/Real/*
+src/Try
+src/DateCounter_
+src/DateCounter
 
 # Editor directories and files
 .vscode/*

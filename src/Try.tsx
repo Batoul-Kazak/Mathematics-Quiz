@@ -48,6 +48,18 @@ export default function Try() {
     type Employee = { name: string } & { age: number };
     let employee = { name: "Batoul", age: age };
 
+    type Person = {
+        name: string,
+        age: number
+    };
+
+    const person1 = { name: "Huda", age: 43 };
+    const person2 = { name: "Rania", age: 30 };
+
+    const people: Person[] = [person1, person2];
+    //OR 
+    const people_: Array<Person> = [person1, person2];
+
     //Enums
     enum Point { x, y, z };
     let xCorrdinate: Point = Point.x;

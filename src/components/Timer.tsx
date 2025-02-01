@@ -1,6 +1,13 @@
 import { useEffect } from "react";
+import { Dispatch } from "react";
+import { Action } from "../types/shared-types";
 
-function Timer({ dispatch, remainingSeconds }) {
+interface TimerProps {
+    dispatch: Dispatch<Action>;
+    remainingSeconds: number;
+};
+
+function Timer({ dispatch, remainingSeconds }: TimerProps) {
     const mins = Math.floor(remainingSeconds / 60);
     const seconds = remainingSeconds & 60;
 
