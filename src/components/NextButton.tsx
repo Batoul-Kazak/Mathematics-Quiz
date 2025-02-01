@@ -1,12 +1,7 @@
-import { Dispatch } from "react";
-import { Action } from "../types/shared-types";
 
-interface NextButtonProps {
-    dispatch: Dispatch<Action>;
-    answer: number | null;
-    index: number;
-    numOfQuestions: number;
-}
+import { MostCommonProps } from "../types/shared-types";
+
+type NextButtonProps = Omit<MostCommonProps, "points" | "question">
 
 function NextButton({ dispatch, answer, index, numOfQuestions }: NextButtonProps) {
     if (answer === null) return null;

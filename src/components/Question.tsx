@@ -1,13 +1,14 @@
 
 import Options from "./Options";
-import { Dispatch } from "react";
-import { QuestionType, Action } from "../types/shared-types";
+import { MostCommonProps } from "../types/shared-types";
 
-interface QuestionProps {
-    question: QuestionType;
-    dispatch: Dispatch<Action>;
-    answer: number | null;
-};
+// interface QuestionProps {
+//     question: QuestionType;
+//     dispatch: Dispatch<Action>;
+//     answer: number | null;
+// };
+
+type QuestionProps = Omit<MostCommonProps, "index" | "numOfQuestions" | "numOfQuestions">;
 
 function Question({ question, dispatch, answer }: QuestionProps) {
     return (

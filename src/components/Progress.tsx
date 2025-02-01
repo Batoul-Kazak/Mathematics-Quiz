@@ -1,9 +1,8 @@
-interface ProgressProps {
-    numOfQuestions: number;
-    index: number;
-    points: number;
+import { MostCommonProps } from "../types/shared-types";
+
+type commonPropsForProgress = Omit<MostCommonProps, "dispatch" | "question">;
+interface ProgressProps extends commonPropsForProgress {
     maxPossiblePoints: number;
-    answer: number | null;
 }
 
 function Progress({ numOfQuestions, index, points, maxPossiblePoints, answer }: ProgressProps) {

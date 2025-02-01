@@ -1,4 +1,4 @@
-
+import { Dispatch } from "react";
 export interface QuestionType {
     question: string;
     options: string[];
@@ -15,3 +15,12 @@ export type Action =
     | { type: "finish" }
     | { type: "restart" }
     | { type: "tick" };
+
+export interface MostCommonProps {
+    dispatch: Dispatch<Action>;
+    answer: number | null;
+    index: number;
+    numOfQuestions: number;
+    points: number;
+    question: QuestionType;
+} 

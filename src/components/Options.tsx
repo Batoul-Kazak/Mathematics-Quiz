@@ -1,11 +1,7 @@
-import { Dispatch } from "react";
-import { QuestionType, Action } from "../types/shared-types";
 
-interface OptionsProps {
-  question: QuestionType;
-  dispatch: Dispatch<Action>;
-  answer: number | null;
-};
+import { MostCommonProps } from "../types/shared-types";
+
+type OptionsProps = Omit<MostCommonProps, "numOfQuestions" | "index" | "points">
 
 function Options({ question, dispatch, answer }: OptionsProps) {
   const hasAnswered = answer !== null;
