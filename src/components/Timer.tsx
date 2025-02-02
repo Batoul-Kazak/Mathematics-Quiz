@@ -4,12 +4,12 @@ import { Action } from "../types/shared-types";
 
 interface TimerProps {
     dispatch: Dispatch<Action>;
-    remainingSeconds: number;
+    remainingSeconds: number | null;
 };
 
 function Timer({ dispatch, remainingSeconds }: TimerProps) {
-    const mins = Math.floor(remainingSeconds / 60);
-    const seconds = remainingSeconds & 60;
+    const mins = Math.floor(remainingSeconds !== null ? remainingSeconds / 60 : 0);
+    const seconds = remainingSeconds !== null ? remainingSeconds & 60 : 0;
 
     useEffect(function () {
         const id = setInterval(function () {

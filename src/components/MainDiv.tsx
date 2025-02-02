@@ -1,6 +1,6 @@
-import React from "react";
+import React, { ReactElement } from "react";
 
-function MainDiv({ children }: React.FC<{ children?: React.ReactNode }>) {
+function MainDiv({ children }) {
     return <main className="main">
         {children}
     </main>

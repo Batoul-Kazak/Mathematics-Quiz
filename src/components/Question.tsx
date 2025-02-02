@@ -2,13 +2,7 @@
 import Options from "./Options";
 import { MostCommonProps } from "../types/shared-types";
 
-// interface QuestionProps {
-//     question: QuestionType;
-//     dispatch: Dispatch<Action>;
-//     answer: number | null;
-// };
-
-type QuestionProps = Omit<MostCommonProps, "index" | "numOfQuestions" | "numOfQuestions">;
+type QuestionProps = Omit<MostCommonProps, "index" | "numOfQuestions" | "points">;
 
 function Question({ question, dispatch, answer }: QuestionProps) {
     return (
